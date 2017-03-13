@@ -23,9 +23,11 @@
         <jsp:include page="/WEB-INF/header.jsp" />
         <div style="display:flex">
             <div style="display:inline-block; width: 20%">
-                <jsp:include page="topic.jsp"/>
+                <div><h3>Topic</h3></div>
+                <jsp:include page="topicWithExplanation.jsp"/>
             </div>
             <div style="display:inline-block; width: 80%">
+                <div style="margin-left: 11px"><h3><%= request.getParameter("opt") %></h3></div>
                 <jsp:include page="/WEB-INF/ani/animation.jsp"/>
             </div>
         </div>

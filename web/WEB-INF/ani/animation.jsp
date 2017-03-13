@@ -82,38 +82,40 @@
         <script type="text/javascript" src="./config.js.php"></script> <!-- used to be opt-frontend.js -->
         <script type="text/javascript" src="./jv-frontend.js?8"></script> <!-- used to be opt-frontend.js -->
         <link rel="stylesheet" href="./OnlinePythonTutor/v3/css/opt-frontend.css"/>
-        
-            <script type="text/javascript">
-                var codeVal = '${codeVal}';
-                document.addEventListener("DOMContentLoaded", function() {
-                    setCodeMirrorVal(codeVal);
-                });
-            </script>
+        <!--load code value into -->
+        <script type="text/javascript">
+            var codeVal = '${codeVal}';
+            document.addEventListener("DOMContentLoaded", function() {
+                setCodeMirrorVal(codeVal);
+            });
+        </script>
 
     </head>
 
     <body>
-        <%
-            if (session == null) {
-                out.print("Please login first");
-                request.getRequestDispatcher("login.jsp").forward(request, response);
-            }
-        %>   
-        
-        <jsp:include page="/WEB-INF/header.jsp" />
+<!--        <table style="margin:0px auto 0px auto;">
+            <tr>
+                <td>
+                    <img title="Based on icons by Jacob Halton and Francesco Terzini of the Noun Project" src="img/jv64.png">
+                </td>
+                <td style="text-align: center">
+                    <span style="font-size:150%">Java Visualizer</span>
+                    <br>
+                    <i>(beta:</i><a href="mailto:daveagp@gmail.com">report a bug</a>)                    
+                </td>
+        </table>-->
+<div>
+    
+    <div id="pyInputPane" style="margin-left: 11px;max-width: 100%;">
 
-        <table style="margin:0px auto 0px auto;"><tr><td><img title="Based on icons by Jacob Halton and Francesco Terzini of the Noun Project" src="img/jv64.png"></td><td style="text-align: center"><span style="font-size:150%">Java Visualizer</span><br><i>(beta:</i> 
-                        <a href="mailto:daveagp@gmail.com">report a bug</a>)
-                </td></table>
-
-        <div id="pyInputPane">
-
-            <p style="text-align:center;">Write your Java code here:</p>
+            <p style="text-align:left;">Write your Java code here:</p>
 
             <div id="codeInputPane">
             </div> <!-- populate with a CodeMirror instance -->
-
-            <table><tr>
+            <div style="display: none">
+                
+            <table>
+                <tr>
                     <td>
                         <button onclick="$('#options').toggle()">options</button>
                     </td>
@@ -121,27 +123,28 @@
                         <span id='options' style='display:none'>
                             <span style="white-space: nowrap;"> 
                                 <input id='showStringsAsObjects' type='checkbox'>
-                                    <label for='showStringsAsObjects'>
-                                        Show String/Integer/etc objects, not just values
-                                        </span>
-                                        <span style="white-space: nowrap;"> 
-                                            <input id='showAllFields' type='checkbox'>
-                                                <label for='showAllFields'>
-                                                    Show overridden fields, synthetics
-                                                    </span>
-                                                    <span style="white-space: nowrap;"> 
-                                                        <input id='disableNesting' type='checkbox'>
-                                                            <label for='disableNesting'>
-                                                                Prefer non-nesting and vertical layouts
-                                                                </span>
-                                                                <span style="white-space: nowrap;"> 
-                                                                    <input id='verticalLists' type='checkbox'>
-                                                                        <label for='verticalLists'>
-                                                                            Force linked lists to display vertically
-                                                                            </span>
-                                                                            </span> <!-- #options -->
-                                                                            </td>
-                                                                            </tr></table>
+                                <label for='showStringsAsObjects'>
+                                Show String/Integer/etc objects, not just values
+                            </span>
+                            <span style="white-space: nowrap;"> 
+                                <input id='showAllFields' type='checkbox'>
+                                <label for='showAllFields'>
+                                Show overridden fields, synthetics
+                            </span>
+                            <span style="white-space: nowrap;"> 
+                                <input id='disableNesting' type='checkbox'>
+                                <label for='disableNesting'>
+                                Prefer non-nesting and vertical layouts
+                            </span>
+                            <span style="white-space: nowrap;"> 
+                                <input id='verticalLists' type='checkbox'>
+                                <label for='verticalLists'>
+                                Force linked lists to display vertically
+                            </span>
+                        </span> <!-- #options -->
+                    </td>
+                </tr>
+            </table>
 
             <div id='args'>
                 <code>args</code>: <span id='argslist'></span>
@@ -157,7 +160,7 @@
                     <sup style='position:absolute;top:5px;right:5px' class='closestdin' onclick='$("#stdin-xdiv").toggle()'>x</sup>
                 </div>
             </div>
-
+            </div>
             <style>
                 button {
                     font-family: verdana, arial, helvetica, sans-serif;
@@ -216,220 +219,21 @@
                 ];
             </script>
 
-            <!--
-            <p style="margin-top: 10px; line-height: 200%;">
-            Execute code using
-              <select id="pythonVersionSelector">
-                <option value="2">Python 2.7</option>
-                <option value="3">Python 3.3</option>
-              </select>,
-            -->
-            <!-- these two make sense, but are not implemented yet
-              <select id="cumulativeModeSelector">
-                <option value="false">hide frames of exited functions</option>
-                <option value="true">show frames of exited functions</option>
-              </select>,
-              <select id="heapPrimitivesSelector">
-                <option value="false">inline primitives and nested objects</option>
-                <option value="true">render all objects on the heap</option>
-              </select>,
-            -->
-            <!--
-              <select id="drawParentPointerSelector">
-                <option value="false">hide environment parent pointers</option>
-                <option value="true">show environment parent pointers</option>
-              </select>,
-              <select id="textualMemoryLabelsSelector">
-                <option value="false">draw references using arrows</option>
-                <option value="true">use text labels for references</option>
-              </select>, and
-              <select id="showOnlyOutputsSelector">
-                <option value="false">show everything</option>
-                <option value="true">show only outputs</option>
-              </select>.
-            </p>
-            -->
-
             <p style="text-align:center">
                 <button id="executeBtn" class="bigBtn" type="button">Visualize Execution</button>
             </p>
-
-
-            <p style="margin-top: 25px;" id="examplesHolder">
-
-                <!--
-                <a id="aliasExampleLink" href="#">hello</a> |
-                <a id="happyExampleLink" href="#">happy</a> |
-                <a id="tutorialExampleLink" href="#">intro</a> |
-                <a id="filterExampleLink" href="#">filter</a> |
-                <a id="strtokExampleLink" href="#">tokenize</a> |
-                <a id="insSortExampleLink" href="#">insertion sort</a> |
-                <a id="listCompLink" href="#">list comprehension</a>
-                </p>
-
-                <p style="margin-top: 15px;">Math-Related Fun:<br/>
-                <a id="factExampleLink" href="#">factorial</a> |
-                <a id="fibonacciExampleLink" href="#">fibonacci</a> |
-                <a id="memoFibExampleLink" href="#">memoized fibonacci</a> |
-                <a id="newtonExampleLink" href="#">square root</a> |
-                <a id="pwGcdLink" href="#">gcd</a> |
-                <a id="towersOfHanoiLink" href="#">towers of hanoi</a>
-                </p>
-
-                <p style="margin-top: 15px;">Higher-Order Functions:<br/>
-
-                <a id="closure1Link" href="#">closure 1</a> |
-                <a id="closure2Link" href="#">closure 2</a> |
-                <a id="closure3Link" href="#">closure 3</a> |
-                <a id="closure4Link" href="#">closure 4</a> |
-                <a id="closure5Link" href="#">closure 5</a>
-                <br/>
-                <! -- <a id="sumCubesLink" href="#">sum cubes</a> | -- >
-                <a id="mapExampleLink" href="#">list map</a> |
-                <a id="sumExampleLink" href="#">summation</a> |
-                <a id="lambdaParamLink" href="#">lambda param</a> |
-                <a id="tortureLink" href="#">student torture</a>
-
-                </p>
-
-                <p style="margin-top: 15px;">User Input:<br/>
-
-                <a id="rawInputExampleLink" href="#">raw input</a>
-
-                </p>
-
-                <p style="margin-top: 15px;">Object-Oriented Programming:<br/>
-
-                <a id="oop1ExampleLink" href="#">OOP 1</a> |
-                <a id="oop2ExampleLink" href="#">OOP 2</a> |
-                <a id="oopSmallExampleLink" href="#">OOP 3</a> |
-                <a id="inheritanceExampleLink" href="#">inheritance</a>
-
-                </p>
-
-                <p style="margin-top: 15px;">Linked Lists:<br/>
-                <a id="ll1Link" href="#">LL 1</a> |
-                <a id="ll2Link" href="#">LL 2</a> |
-                <a id="sumListLink" href="#">LL sum</a>
-                </p>
-
-                <p style="margin-top: 15px;">Pointer Aliasing:<br/>
-                <a id="aliasing1Link" href="#">aliasing 1</a> |
-                <a id="aliasing2Link" href="#">aliasing 2</a> |
-                <a id="aliasing3Link" href="#">aliasing 3</a> |
-                <a id="aliasing4Link" href="#">aliasing 4</a>
-                <br/>
-                <a id="aliasing5Link" href="#">aliasing 5</a> |
-                <a id="aliasing6Link" href="#">aliasing 6</a> |
-                <a id="aliasing7Link" href="#">aliasing 7</a> |
-                <a id="aliasing8Link" href="#">aliasing 8</a> |
-                <a id="pwSumListLink" href="#">sumList</a>
-                </p>
-
-                <p style="margin-top: 15px;">More Python Tricks:<br/>
-                <a id="decoratorsLink" href="#">decorators</a> |
-                <a id="genPrimesLink" href="#">generators</a> |
-                <a id="genExprLink" href="#">gen expr</a> |
-                <a id="varargsLink" href="#">varargs</a> |
-                <a id="pwTryFinallyLink" href="#">exceptions</a> |
-                <a id="forElseLink" href="#">for-else</a> |
-                <a id="nonlocalLink" href="#">nonlocal</a>
-                </p>
-                -->
-                <div>The visualizer supports 
-                    <code><a href="http://introcs.cs.princeton.edu/java/stdlib/javadoc/StdIn.html">StdIn</a></code>, 
-                    <code><a href="http://introcs.cs.princeton.edu/java/stdlib/javadoc/StdOut.html">StdOut</a></code>, 
-                    most other <a href="http://introcs.cs.princeton.edu/java/stdlib"><tt>stdlib</tt> libraries</a>,
-                    <a href="http://introcs.cs.princeton.edu/java/43stack/Stack.java.html"><tt>Stack</tt></a>,
-                    <a href="http://introcs.cs.princeton.edu/java/43stack/Queue.java.html"><tt>Queue</tt></a>,
-                    and <a href="http://introcs.cs.princeton.edu/java/44st/ST.java.html"><tt>ST</tt></a>.
-                    <br>
-                        <div class='toggler'>
-                            <a style='text-decoration:none' href='#'>Click for FAQ.</a>
-                        </div>
-                        <div id='faq' style='display:none'>
-                            <ul>
-                                <li><i>How can I access Java's built-in <tt>Stack</tt>/<tt>Queue</tt> instead of the introcs one?</i> At the top of your program, write <tt>import java.util.Stack;</tt> &mdash; note, <tt>import java.util.*;</tt> won't work.
-                                    <li><i>How do I get shorter URLs?</i> For example code, you can use <a target="_blank" href="#sampleFile=ExecLimit"><tt>#sampleFile=ExecLimit</tt></a> but 
-                                        in general, this is a feature that still <a href="TODO">needs to be implemented</a>. You could use <a href="http://goo.gl">goo.gl</a> for now.
-                                    </li>
-                            </ul>
-                        </div>
-                </div>
-
-                </div>
-
-
-                <div id="pyOutputPane">
-                </div>
-
-                <div id="footer">
-
-                    <p>
-                        <button id="genUrlBtn" class="smallBtn" type="button">Generate URL</button> <input type="text" id="urlOutput" size="70"/>
-                    </p>
-
-                    <p>To share this visualization, click the 'Generate URL' button above
-                        and share that URL. To report a bug, paste the URL along with a brief
-                        error description in an email addressed to daveagp@gmail.com</p>
-
-                    <div id="iframeURL-div" style="display: none;">Embeddable iframe:<input type="text" id="iframeURL" size="70" style="font-family:monospace"/></div>
-
-                    <!--
-                    <div id="embedLinkDiv">
-                    <p>
-                      <button id="genEmbedBtn" class="smallBtn" type="button">Generate embed code</button> <input type="text" id="embedCodeOutput" size="70"/>
-                    </p>
-
-                    <p>To embed this visualization in your webpage, click the 'Generate
-                    embed code' button above and paste the resulting HTML code into your
-                    webpage. Adjust the height and width parameters as needed.</p>
-                    </div>
-                    -->
-
-                    <!--
-
-                    <a href="http://pythontutor.com/">Online Python Tutor</a> supports <a
-                    href="http://www.python.org/doc/2.7/">Python 2.7</a> and <a
-                    href="http://www.python.org/doc/3.3.0/">Python 3.3</a> with limited module
-                    imports and no file I/O. 
-                    The following modules may be imported: 
-                    bisect,
-                    collections,
-                    datetime,
-                    functools,
-                    heapq,
-                    json,
-                    math,
-                    operator,
-                    random,
-                    re,
-                    string
-                    </p>
-
-                    <p>Have a question? Maybe the <a
-                    href="https://github.com/pgbovine/OnlinePythonTutor/blob/master/v3/docs/user-FAQ.md">FAQ</a>
-                    or other <a
-                    href="https://github.com/pgbovine/OnlinePythonTutor/blob/master/v3/docs/">documentation</a>
-                    can help. Or check out its code at <a
-                    href="https://github.com/pgbovine/OnlinePythonTutor/">GitHub</a>.</p>
-
-                    <p>Join the <a
-                    href="https://groups.google.com/forum/#!forum/pythontutor-users">pythontutor-users</a>
-                    mailing list to participate in user discussions and <a
-                    href="https://groups.google.com/forum/#!forum/pythontutor-announce">pythontutor-announce</a>
-                    to receive occasional announcements.
-                    (Your name and email address will be kept private; only the list owner can see them.)</p>
-
-                    -->
-
-                    <p style="margin-top: 8px;">
-                        Based on <a href="http://www.pythontutor.com">Online Python Tutor</a>, &copy; 2010-2013 <a href="http://www.pgbovine.net/">Philip Guo</a> all rights reserved. Java version by <a href="mailto:daveagp@gmail.com">David Pritchard</a>, <a href="https://github.com/wgwozdz">Will Gwozdz</a>.
-                        Source code: for this version's <a href="https://github.com/daveagp/java_jail/tree/master/cp/traceprinter">backend</a>;
-                        the <a href="https://github.com/daveagp/java_visualize">frontend and installation instructions</a>.
-                    </p>
-
-                </div>
-
-                </body>
-                </html>
+        </div>
+    <div id="pyOutputPane" style="border: 1px solid #DDDDDD;margin-left: 12px;
+margin-right: auto;"></div>
+</div>
+        
+        
+<!--        <div id="footer">
+            <p style="margin-top: 8px;">
+                Based on <a href="http://www.pythontutor.com">Online Python Tutor</a>, &copy; 2010-2013 <a href="http://www.pgbovine.net/">Philip Guo</a> all rights reserved. Java version by <a href="mailto:daveagp@gmail.com">David Pritchard</a>, <a href="https://github.com/wgwozdz">Will Gwozdz</a>.
+                Source code: for this version's <a href="https://github.com/daveagp/java_jail/tree/master/cp/traceprinter">backend</a>;
+                the <a href="https://github.com/daveagp/java_visualize">frontend and installation instructions</a>.
+            </p>
+        </div>-->
+    </body>
+</html>

@@ -29,6 +29,14 @@
         <servlet-name>TeachingControl</servlet-name>
         <servlet-class>controller.TeachingControl</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AssessmentControl</servlet-name>
+        <servlet-class>controller.AssessmentControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>QuestionHandler</servlet-name>
+        <servlet-class>controller.QuestionHandler</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Quercus Servlet</servlet-name>
         <url-pattern>*.php</url-pattern>
@@ -71,6 +79,14 @@
     <servlet-mapping>
         <servlet-name>TeachingControl</servlet-name>
         <url-pattern>/TeachingControl.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AssessmentControl</servlet-name>
+        <url-pattern>/AssessmentControl.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>QuestionHandler</servlet-name>
+        <url-pattern>/QuestionHandler.do</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

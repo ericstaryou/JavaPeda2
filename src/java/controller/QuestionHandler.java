@@ -13,13 +13,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import model.Topic;
+import model.*;
 
 /**
  *
  * @author ericstaryou
  */
-public class TeachingControl extends HttpServlet {
+public class QuestionHandler extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,18 +37,10 @@ public class TeachingControl extends HttpServlet {
         HttpSession session = request.getSession(false);
         Connection conn = (Connection) request.getServletContext().getAttribute("connection");
         
-        String subtopicName = request.getParameter("opt");
-        Topic selectedTopic = new Topic(conn, subtopicName);
-        session.setAttribute("selectedTopic", selectedTopic);
-        
-        request.setAttribute("codeVal", selectedTopic.getDemoCode());
-        
-        //request.getRequestDispatcher("/WEB-INF/ani/animation.jsp").forward(request, response);
-        //if user selected to start Assessment (from teaching.jsp)
-        if(request.getParameter("opt").equals("Assessment")){
-            request.getRequestDispatcher("AssessmentControl.do").forward(request, response);
-        }
-        request.getRequestDispatcher("/WEB-INF/teaching.jsp").forward(request, response);
+        Assessment assessment = (Assessment)session.getAttribute("asmt");
+        int noOfQuestion = assessment.getNoOfQuestion();
+        Integer questionCounter = (Integer)session.getAttribute("questionCounter");
+        Question question[] = {};
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

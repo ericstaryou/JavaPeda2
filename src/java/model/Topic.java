@@ -42,7 +42,7 @@ public class Topic {
                 this.subtopic.textualExplanation = rs.getString(4);
                 this.subtopic.codeValue = rs.getString(5);
             }
-        }catch(Exception ex){
+        } catch (Exception ex) {
             Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -188,6 +188,20 @@ public class Topic {
     //for the use of selected topic only (in TeachingControl)
     public String getDemoCode() {
         return this.subtopic.codeValue;
+    }
+
+    public String getSubtopicTitles() {
+        StringBuilder b = new StringBuilder();
+        try {
+            select("SELECT * FROM subtopic WHERE topicID=" + this.topicID);
+            while (rs.next()) {
+                b.append("<input class=\"subt\" name=\"opt\" type=\"submit\" value=\"" + rs.getString(3) +"\"><br>");
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        return b.toString();
     }
 
     public static void main(String args[]) {

@@ -159,23 +159,23 @@ $(document).ready(function() {
     appMode = $.bbq.getState('mode'); // assign this to the GLOBAL appMode
 
     if (appMode === undefined || appMode == 'edit') {
-      $("#pyInputPane").show();
-      $("#pyOutputPane").hide();
+      //$("#pyInputPane").show();
+      //$("#pyOutputPane").hide();
       $("#embedLinkDiv").hide();
-
+      $('#executeBtn').attr('disabled', false);
       // destroy all annotation bubbles (NB: kludgy)
       if (myVisualizer) {
         myVisualizer.destroyAllAnnotationBubbles();
       }
     }
     else if (appMode == 'display') {
-      $("#pyInputPane").hide();
-      $("#pyOutputPane").show();
+      //$("#pyInputPane").hide();
+      //$("#pyOutputPane").show();
 
       $("#embedLinkDiv").show();
 
       $('#executeBtn').html("Visualize execution");
-      $('#executeBtn').attr('disabled', false);
+      $('#executeBtn').attr('disabled', true);
 
 
       // do this AFTER making #pyOutputPane visible, or else
@@ -190,8 +190,8 @@ $(document).ready(function() {
       });
     }
     else if (appMode == 'display_no_frills') {
-      $("#pyInputPane").hide();
-      $("#pyOutputPane").show();
+      //$("#pyInputPane").hide();
+      //$("#pyOutputPane").show();
       $("#embedLinkDiv").show();
     }
     else {
@@ -218,7 +218,7 @@ $(document).ready(function() {
 
       $('#executeBtn').html("Please wait ... processing your code");
       $('#executeBtn').attr('disabled', true);
-      $("#pyOutputPane").hide();
+      //$("#pyOutputPane").hide();
       $("#embedLinkDiv").hide();
 
     var java_backend_options = {};
