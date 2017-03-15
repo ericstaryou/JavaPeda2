@@ -81,6 +81,16 @@ public class LoginControl extends HttpServlet {
                 user.setUsername(username);
                 user.setFname(fname);
                 user.setLname(lname);
+                user.select("select * from  subtopic_in_progress where username ='" + username + "'");
+                ResultSet rs2 = user.getRs();
+                while(rs2.next()){
+                    user.getState().setSubtopicID(rs2.getInt(2));
+                }
+                user.select("select * from assessment_in_progress where username ='" + username + "'");
+                ResultSet rs3 = user.getRs();
+                while(rs3.next()){
+                    user.getState().setAssessmentID(rs3.getInt(2));
+                }
                 session.setAttribute("userbean", user); //storing the user object and params for later use  
                 //request.getRequestDispatcher("/WEB-INF/ani/animation.jsp").forward(request, response);
                 request.getRequestDispatcher("DashboardControl.do").forward(request, response);

@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.Assessment;
+import model.User;
 
 /**
  *
@@ -42,6 +43,13 @@ public class AssessmentControl extends HttpServlet {
         session.setAttribute("asmt", assessment);
         int noOfQuestion = assessment.getNoOfQuestion();
         session.setAttribute("questionCounter", 0);
+        
+        User user = (User)session.getAttribute("userbean");
+        int assessmentID = assessment.getAssessmentID();
+        
+        //update user state
+        user.getState().setAssessmentID(assessmentID);
+        user.updateAssessment(assessmentID);
         
         
         

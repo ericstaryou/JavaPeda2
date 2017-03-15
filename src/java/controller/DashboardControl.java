@@ -46,6 +46,26 @@ public class DashboardControl extends HttpServlet {
             session.setAttribute("topic"+i , topic[i]);
         }
         
+        //get user state and pass it on to show on dashboard
+        String subtopicName = user.getCurrentSubtopicName();
+        String assessmentName = user.getCurrentAssessmentName();
+        
+        if(subtopicName == null){
+            String msg = "You haven't start learning on any topic yet";
+            session.setAttribute("subtopicProgress", msg);
+        }else{
+            String msg = "You stopped at " + subtopicName;
+            session.setAttribute("subtopicProgress", msg);
+        }
+        
+        if(assessmentName == null){
+            String msg = "You haven't start any assessment yet";
+            session.setAttribute("assessmentProgress", msg);
+        }else{
+            String msg = "You stopped at " + assessmentName;
+            session.setAttribute("assessmentProgress", msg);
+        }
+        
         request.getRequestDispatcher("/WEB-INF/dashboard.jsp").forward(request, response);
         
     }

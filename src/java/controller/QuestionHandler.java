@@ -36,11 +36,38 @@ public class QuestionHandler extends HttpServlet {
         PrintWriter out = response.getWriter();
         HttpSession session = request.getSession(false);
         Connection conn = (Connection) request.getServletContext().getAttribute("connection");
-        
-        Assessment assessment = (Assessment)session.getAttribute("asmt");
+
+        Assessment assessment = (Assessment) session.getAttribute("asmt");
         int noOfQuestion = assessment.getNoOfQuestion();
-        Integer questionCounter = (Integer)session.getAttribute("questionCounter");
-        Question question[] = {};
+        Integer questionCounter = (Integer) session.getAttribute("questionCounter");
+        String answer = assessment.getQuestion()[questionCounter].getAnswer();
+
+        if(request.getParameter("opt") == null){
+            request.setAttribute("question", assessment.constructPage(questionCounter));
+            request.getRequestDispatcher("/WEB-INF/assessment.jsp").include(request, response);
+            //out.print("<p style=\"float:right\">Please select an answer!</p>");
+            out.print("Please select an answer!");
+        }else if (!request.getParameter("opt").equals(answer)) {
+            request.setAttribute("question", assessment.constructPage(questionCounter));
+            request.getRequestDispatcher("/WEB-INF/assessment.jsp").include(request, response);
+           //out.print("<p style=\"float:right\">Please try again!</p>");
+           out.print("Please try again!");
+        } else {
+            if((questionCounter + 1) == noOfQuestion){ //when user done the assessment
+                request.getRequestDispatcher("/WEB-INF/doneAssessment.jsp").forward(request, response);
+            }
+            else if ((questionCounter + 2) == noOfQuestion) { //if this is the last question
+                session.setAttribute("questionCounter", questionCounter + 1);
+                request.setAttribute("question", assessment.constructPage(questionCounter + 1));
+                request.getRequestDispatcher("/WEB-INF/assessment.jsp").include(request, response);
+                out.print("this is the last question");
+            }
+            else{
+                session.setAttribute("questionCounter", questionCounter + 1);
+                request.setAttribute("question", assessment.constructPage(questionCounter + 1));
+                request.getRequestDispatcher("/WEB-INF/assessment.jsp").forward(request, response);
+            }            
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

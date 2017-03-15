@@ -20,7 +20,7 @@
             <form action="QuestionHandler.do" method="get">
                 <%= request.getAttribute("question")%>
                 <br/>
-                <input type=submit value="Proceed"> <br/>
+                <input type=submit value="Proceed"><br/>
             </form>
         </div>
     </body>

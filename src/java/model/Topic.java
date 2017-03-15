@@ -82,6 +82,10 @@ public class Topic {
         }
     }
 
+    public Subtopic getSubtopic() {
+        return subtopic;
+    }
+
     public int getTopicID() {
         return topicID;
     }
@@ -90,7 +94,7 @@ public class Topic {
         this.topicID = topicID;
     }
 
-    public Subtopic[] getSubtopic() {
+    public Subtopic[] getSubtopics() {
         return subtopics;
     }
 
@@ -195,7 +199,7 @@ public class Topic {
         try {
             select("SELECT * FROM subtopic WHERE topicID=" + this.topicID);
             while (rs.next()) {
-                b.append("<input class=\"subt\" name=\"opt\" type=\"submit\" value=\"" + rs.getString(3) +"\"><br>");
+                b.append("<input class=\"subt\" name=\"opt\" type=\"submit\" value=\"" + rs.getString(3) + "\"><br>");
             }
         } catch (Exception ex) {
             ex.printStackTrace();

@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.Topic;
+import model.User;
 
 /**
  *
@@ -39,15 +40,21 @@ public class TeachingControl extends HttpServlet {
         
         String subtopicName = request.getParameter("opt");
         Topic selectedTopic = new Topic(conn, subtopicName);
-        session.setAttribute("selectedTopic", selectedTopic);
+        User user = (User)session.getAttribute("userbean");
+        int subtopicID = selectedTopic.getSubtopic().getSubtopicID();
         
-        request.setAttribute("codeVal", selectedTopic.getDemoCode());
-        
-        //request.getRequestDispatcher("/WEB-INF/ani/animation.jsp").forward(request, response);
         //if user selected to start Assessment (from teaching.jsp)
         if(request.getParameter("opt").equals("Assessment")){
             request.getRequestDispatcher("AssessmentControl.do").forward(request, response);
         }
+        
+        //update user state
+        user.getState().setSubtopicID(subtopicID);
+        user.updateSelectedTopic(subtopicID);
+        
+        session.setAttribute("selectedTopic", selectedTopic);
+        request.setAttribute("codeVal", selectedTopic.getDemoCode());
+        
         request.getRequestDispatcher("/WEB-INF/teaching.jsp").forward(request, response);
     }
 

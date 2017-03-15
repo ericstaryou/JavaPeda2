@@ -173,7 +173,7 @@ public class Assessment {
         b.append("<p class=\"question\">" + (qNo + 1) + ") " + this.questions[qNo].question + "</p>");
         b.append("<ul class=\"answers\">");
         for (int j = 0; j < 4; j++) {
-            b.append("<input type=\"radio\" name=\"q" + (qNo + 1) + "\" value=\"" + this.questions[qNo].options[j] + "\" id=\"q1a\"><label for=\"q1a\">" + this.questions[qNo].options[j] + "</label><br/>");
+            b.append("<input type=\"radio\" name=\"opt\" value=\"" + this.questions[qNo].options[j] + "\" id=\"q1a\"><label for=\"q1a\">" + this.questions[qNo].options[j] + "</label><br/>");
         }
         b.append("</ul>");
         return b.toString();

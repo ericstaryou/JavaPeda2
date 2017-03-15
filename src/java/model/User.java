@@ -179,10 +179,80 @@ public class User {
         }
         return sb.toString();
     }
-    
+
     //for topic selection *******
-    public void updateSelectedTopic(int subtopicID){
+    public void updateSelectedTopic(int subtopicID) {
         this.state.subtopicID = subtopicID;
+        PreparedStatement ps = null;
+        try {
+            boolean exist = false;
+            select("select * from subtopic_in_progress where username='" + this.username + "'");
+            if (rs.next()) {
+                exist = true;
+            }
+
+            if (exist) {
+                ps = connection.prepareStatement("UPDATE subtopic_in_progress SET subtopicID=? WHERE username=?", PreparedStatement.RETURN_GENERATED_KEYS);
+                ps.setInt(1, subtopicID);
+                ps.setString(2, this.username.trim());
+                ps.executeUpdate();
+            } else {
+                ps = connection.prepareStatement("INSERT INTO subtopic_in_progress VALUES (?,?)", PreparedStatement.RETURN_GENERATED_KEYS);
+                ps.setString(1, this.username.trim()); //username
+                ps.setInt(2, subtopicID); //subtopicID
+                ps.executeUpdate();
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void updateAssessment(int assessmentID) {
+        this.state.subtopicID = assessmentID;
+        PreparedStatement ps = null;
+        try {
+            boolean exist = false;
+            select("select * from assessment_in_progress where username='" + this.username + "'");
+            if (rs.next()) {
+                exist = true;
+            }
+
+            if (exist) {
+                ps = connection.prepareStatement("UPDATE assessment_in_progress SET assessmentID=? WHERE username=?", PreparedStatement.RETURN_GENERATED_KEYS);
+                ps.setInt(1, assessmentID);
+                ps.setString(2, this.username.trim());
+                ps.executeUpdate();
+            } else {
+                ps = connection.prepareStatement("INSERT INTO assessment_in_progress VALUES (?,?)", PreparedStatement.RETURN_GENERATED_KEYS);
+                ps.setString(1, this.username.trim()); //username
+                ps.setInt(2, assessmentID); //assessmentID
+                ps.executeUpdate();
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public String getCurrentSubtopicName() {
+        try {
+            select("SELECT * FROM subtopic WHERE subtopicID=" + this.state.getSubtopicID());
+            while (rs.next()) {
+                return rs.getString(3);
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    public String getCurrentAssessmentName() {
+        if(this.state.assessmentID != 0){
+            return "Assessment " + this.state.assessmentID;
+        }else{
+            return null;
+        }
     }
 
     public static void main(String[] args) {

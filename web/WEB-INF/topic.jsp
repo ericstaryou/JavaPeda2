@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <%  Topic topics[] = new Topic[3];
     for (int i = 0; i < 3; i++) {
-        topics[i] = (Topic) session.getAttribute("topic"+i);
+        topics[i] = (Topic) session.getAttribute("topic" + i);
     }
 %>
 <html>
@@ -54,7 +54,7 @@
                 overflow: hidden;
                 transition: max-height 0.2s ease-out;
             }
-            
+
             input.subt{
                 background-color: #eee;
                 color: #444;
@@ -71,32 +71,31 @@
     </head>
     <body>
         <h3>Topic</h3>
-        <div>
-            <button class="accordion"><%= topics[0].getTopicName() %></button>
-            <div class="panel">
-                <div>
-                    <form action="TeachingControl.do" method="get">
-                        <%= topics[0].getSubtopicTitles() %>
-                    </form>
-                </div>
-            </div>
 
-            <button class="accordion"><%= topics[1].getTopicName() %></button>
-            <div class="panel">
-                <div>
-                    <form action="TeachingControl.do" method="get">
-                        <%= topics[1].getSubtopicTitles() %>
-                    </form>
-                </div>
+        <button class="accordion"><%= topics[0].getTopicName()%></button>
+        <div class="panel">
+            <div>
+                <form action="TeachingControl.do" method="get">
+                    <%= topics[0].getSubtopicTitles()%>
+                </form>
             </div>
+        </div>
 
-            <button class="accordion"><%= topics[2].getTopicName() %></button>
-            <div class="panel">
-                <div>
-                    <form action="TeachingControl.do" method="get">
-                        <%= topics[2].getSubtopicTitles() %>
-                    </form>
-                </div>
+        <button class="accordion"><%= topics[1].getTopicName()%></button>
+        <div class="panel">
+            <div>
+                <form action="TeachingControl.do" method="get">
+                    <%= topics[1].getSubtopicTitles()%>
+                </form>
+            </div>
+        </div>
+
+        <button class="accordion"><%= topics[2].getTopicName()%></button>
+        <div class="panel">
+            <div>
+                <form action="TeachingControl.do" method="get">
+                    <%= topics[2].getSubtopicTitles()%>
+                </form>
             </div>
         </div>
 

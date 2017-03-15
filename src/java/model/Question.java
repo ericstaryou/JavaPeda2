@@ -9,7 +9,7 @@ package model;
  *
  * @author ericstaryou
  */
-class Question {
+public class Question {
     int questionID;
     String question;
     String[] options;
