@@ -17,7 +17,8 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-        <title>JSP Page</title>
+        <link type="text/css" href="./javapeda.css" rel="stylesheet" />
+        <title>JavaPeda - Dashboard</title>
     </head>
     <body>
         <jsp:include page="header.jsp"/>
@@ -37,8 +38,8 @@
                             </div> 
                             <div style="display: inline-block">
                                 <p><%= session.getAttribute("subtopicProgress") %>.</p>
-                                <form>
-                                    <input type=submit value="Resume">
+                                <form action="SubtopicUserProgressControl.do" method="GET">
+                                    <input type=submit name="opt" value="Resume">
                                 </form>
                             </div>
                         </div>
@@ -51,8 +52,8 @@
                             </div>  
                             <div>
                                 <p><%= session.getAttribute("assessmentProgress") %>.</p>
-                                <form>
-                                    <input type=submit value="Resume">
+                                <form action="AssessmentUserProgressControl.do" method="GET">
+                                    <input type=submit name="opt" value="Resume">
                                 </form>
                             </div>
                         </div>

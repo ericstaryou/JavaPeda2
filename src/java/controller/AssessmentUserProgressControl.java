@@ -13,14 +13,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import model.Topic;
+import model.Assessment;
 import model.User;
 
 /**
  *
  * @author ericstaryou
  */
-public class DashboardControl extends HttpServlet {
+public class AssessmentUserProgressControl extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,37 +39,20 @@ public class DashboardControl extends HttpServlet {
         Connection conn = (Connection) request.getServletContext().getAttribute("connection");
         
         User user = (User) session.getAttribute("userbean");
-        Topic topic[] = new Topic[3];
-        
-        for (int i = 0; i < 3; i++) {
-            topic[i] = new Topic(conn, i+1);
-            session.setAttribute("topic"+i , topic[i]);
-        }
-        
-        //get user state and pass it on to show on dashboard
-        String subtopicName = user.getCurrentSubtopicName();
         String assessmentName = user.getCurrentAssessmentName();
-        
-        if(subtopicName == null){
-            String msg = "You haven't start learning on any topic yet";
-            session.setAttribute("subtopicProgress", msg);
-        }else{
-            String msg = "You stopped at " + subtopicName;
-            session.setAttribute("subtopicName", subtopicName);
-            session.setAttribute("subtopicProgress", msg);
-        }
-        
-        if(assessmentName == null){
-            String msg = "You haven't start any assessment yet";
-            session.setAttribute("assessmentProgress", msg);
-        }else{
-            String msg = "You stopped at " + assessmentName;
-            request.setAttribute("assessmentName", assessmentName);
-            session.setAttribute("assessmentProgress", msg);
-        }
-        
-        request.getRequestDispatcher("/WEB-INF/dashboard.jsp").forward(request, response);
-        
+
+        //String assessmentName = (String) session.getAttribute("assessmentName");
+        Assessment assessment = new Assessment(conn, assessmentName);
+        session.setAttribute("asmt", assessment);
+        int noOfQuestion = assessment.getNoOfQuestion();
+        session.setAttribute("questionCounter", 0);
+        //update user state
+        int assessmentID = assessment.getAssessmentID();
+        user.getState().setAssessmentID(assessmentID);
+        user.updateAssessment(assessmentID);
+
+        request.setAttribute("question", assessment.constructPage(0));
+        request.getRequestDispatcher("/WEB-INF/assessment.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -9,7 +9,8 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <link type="text/css" href="./javapeda.css" rel="stylesheet" />
+        <title>JavaPeda - Assessment</title>
     </head>
     <body>
         <jsp:include page="/WEB-INF/header.jsp" />

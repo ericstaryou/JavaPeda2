@@ -106,7 +106,7 @@
         </table>-->
 <div>
     
-    <div id="pyInputPane" style="margin-left: 11px;max-width: 100%;">
+    <div id="pyInputPane" style="margin: auto">
 
             <p style="text-align:left;">Write your Java code here:</p>
 
@@ -223,8 +223,7 @@
                 <button id="executeBtn" class="bigBtn" type="button">Visualize Execution</button>
             </p>
         </div>
-    <div id="pyOutputPane" style="border: 1px solid #DDDDDD;margin-left: 12px;
-margin-right: auto;"></div>
+    <div id="pyOutputPane"></div>
 </div>
         
         

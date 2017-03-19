@@ -9,10 +9,12 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <link type="text/css" href="./javapeda.css" rel="stylesheet" />
+        <title>JavaPeda - Register</title>
     </head>
     <body>
-        <h1>Register page</h1>
+        <jsp:include page="header2.jsp"/>
+        <h2>Register</h2>
         <form action="RegControl.do" method="post">
             First Name:<br>
             <input type="text" name="firstname" placeholder="firstname" id="firstname">

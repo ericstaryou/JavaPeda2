@@ -20,7 +20,7 @@ import model.User;
  *
  * @author ericstaryou
  */
-public class DashboardControl extends HttpServlet {
+public class SubtopicUserProgressControl extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,39 +37,22 @@ public class DashboardControl extends HttpServlet {
         PrintWriter out = response.getWriter();
         HttpSession session = request.getSession(false);
         Connection conn = (Connection) request.getServletContext().getAttribute("connection");
-        
+
+        String subtopicName = request.getParameter("opt");
+        Topic selectedTopic = new Topic(conn, subtopicName);
         User user = (User) session.getAttribute("userbean");
-        Topic topic[] = new Topic[3];
-        
-        for (int i = 0; i < 3; i++) {
-            topic[i] = new Topic(conn, i+1);
-            session.setAttribute("topic"+i , topic[i]);
-        }
-        
-        //get user state and pass it on to show on dashboard
-        String subtopicName = user.getCurrentSubtopicName();
-        String assessmentName = user.getCurrentAssessmentName();
-        
-        if(subtopicName == null){
-            String msg = "You haven't start learning on any topic yet";
-            session.setAttribute("subtopicProgress", msg);
-        }else{
-            String msg = "You stopped at " + subtopicName;
-            session.setAttribute("subtopicName", subtopicName);
-            session.setAttribute("subtopicProgress", msg);
-        }
-        
-        if(assessmentName == null){
-            String msg = "You haven't start any assessment yet";
-            session.setAttribute("assessmentProgress", msg);
-        }else{
-            String msg = "You stopped at " + assessmentName;
-            request.setAttribute("assessmentName", assessmentName);
-            session.setAttribute("assessmentProgress", msg);
-        }
-        
-        request.getRequestDispatcher("/WEB-INF/dashboard.jsp").forward(request, response);
-        
+        int subtopicID = selectedTopic.getSubtopic().getSubtopicID();
+
+        subtopicName = (String) session.getAttribute("subtopicName");
+        selectedTopic = new Topic(conn, subtopicName);
+        //update user state
+        user.getState().setSubtopicID(subtopicID);
+        user.updateSelectedTopic(subtopicID);
+
+        request.setAttribute("subtopicName", subtopicName);
+        session.setAttribute("selectedTopic", selectedTopic);
+        request.setAttribute("codeVal", selectedTopic.getDemoCode());
+        request.getRequestDispatcher("/WEB-INF/teaching.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

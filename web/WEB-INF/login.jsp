@@ -9,12 +9,14 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>JavaPeda - Login</title>
         <script type="text/javascript" src="frontend.js"></script>
+        <link type="text/css" href="./javapeda.css" rel="stylesheet" />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     </head>
     <body>
-        <h1>Login Page</h1>
+        <jsp:include page="header2.jsp"/>
+        <h2>Login</h2>
         <form action="LoginControl.do" method="post">
             Username:<br>
             <input type="text" name="username" placeholder="username" id="username" value="">

@@ -37,24 +37,36 @@ public class TeachingControl extends HttpServlet {
         PrintWriter out = response.getWriter();
         HttpSession session = request.getSession(false);
         Connection conn = (Connection) request.getServletContext().getAttribute("connection");
-        
+
         String subtopicName = request.getParameter("opt");
         Topic selectedTopic = new Topic(conn, subtopicName);
-        User user = (User)session.getAttribute("userbean");
+        User user = (User) session.getAttribute("userbean");
         int subtopicID = selectedTopic.getSubtopic().getSubtopicID();
-        
+
+//        if (request.getParameter("opt").equals("Resume")) {
+//            subtopicName = (String) session.getAttribute("subtopicName");
+//            selectedTopic = new Topic(conn, subtopicName);
+//            //update user state
+//            user.getState().setSubtopicID(subtopicID);
+//            user.updateSelectedTopic(subtopicID);
+//            session.setAttribute("selectedTopic", selectedTopic);
+//            request.setAttribute("codeVal", selectedTopic.getDemoCode());
+//            request.getRequestDispatcher("/WEB-INF/teaching.jsp").forward(request, response);
+//        }
+
         //if user selected to start Assessment (from teaching.jsp)
-        if(request.getParameter("opt").equals("Assessment")){
+        if (request.getParameter("opt").equals("Assessment")) {
             request.getRequestDispatcher("AssessmentControl.do").forward(request, response);
         }
-        
+
         //update user state
         user.getState().setSubtopicID(subtopicID);
         user.updateSelectedTopic(subtopicID);
-        
+
+        request.setAttribute("subtopicName", request.getParameter("opt"));
         session.setAttribute("selectedTopic", selectedTopic);
         request.setAttribute("codeVal", selectedTopic.getDemoCode());
-        
+
         request.getRequestDispatcher("/WEB-INF/teaching.jsp").forward(request, response);
     }
 

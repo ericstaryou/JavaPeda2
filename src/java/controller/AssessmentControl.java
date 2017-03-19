@@ -37,24 +37,23 @@ public class AssessmentControl extends HttpServlet {
         PrintWriter out = response.getWriter();
         HttpSession session = request.getSession(false);
         Connection conn = (Connection) request.getServletContext().getAttribute("connection");
-        
+
         String assessmentName = request.getParameter("assessment");
         Assessment assessment = new Assessment(conn, assessmentName);
         session.setAttribute("asmt", assessment);
         int noOfQuestion = assessment.getNoOfQuestion();
         session.setAttribute("questionCounter", 0);
-        
-        User user = (User)session.getAttribute("userbean");
+
+        User user = (User) session.getAttribute("userbean");
         int assessmentID = assessment.getAssessmentID();
-        
+
         //update user state
         user.getState().setAssessmentID(assessmentID);
         user.updateAssessment(assessmentID);
-        
-        
-        
+
         request.setAttribute("question", assessment.constructPage(0));
         request.getRequestDispatcher("/WEB-INF/assessment.jsp").forward(request, response);
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -31,13 +31,13 @@ public class LogoutControl extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        request.getRequestDispatcher("/WEB-INF/header.jsp").include(request, response);
+        
         
         PrintWriter out = response.getWriter();
         HttpSession session = request.getSession();
         session.invalidate();
-        out.print("You are logged out!");
-        out.close();
+        request.getRequestDispatcher("/WEB-INF/logout.jsp").forward(request, response);
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

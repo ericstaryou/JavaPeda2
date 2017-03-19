@@ -159,8 +159,8 @@ $(document).ready(function() {
     appMode = $.bbq.getState('mode'); // assign this to the GLOBAL appMode
 
     if (appMode === undefined || appMode == 'edit') {
-      //$("#pyInputPane").show();
-      //$("#pyOutputPane").hide();
+      $("#pyInputPane").show();
+      $("#pyOutputPane").hide();
       $("#embedLinkDiv").hide();
       $('#executeBtn').attr('disabled', false);
       // destroy all annotation bubbles (NB: kludgy)
@@ -169,8 +169,8 @@ $(document).ready(function() {
       }
     }
     else if (appMode == 'display') {
-      //$("#pyInputPane").hide();
-      //$("#pyOutputPane").show();
+      $("#pyInputPane").hide();
+      $("#pyOutputPane").show();
 
       $("#embedLinkDiv").show();
 

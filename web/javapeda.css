@@ -1,0 +1,23 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 19-Mar-2017, 00:48:22
+    Author     : ericstaryou
+*/
+
+body {
+    font-family: verdana, arial, helvetica, sans-serif;
+    font-size: 12pt;
+}
+
+h1 {
+    font-weight: normal;
+    font-size: 20pt;
+    font-family: georgia, serif;
+    line-height: 1em;
+    margin-top: 0px;
+    margin-bottom: 8px;
+}

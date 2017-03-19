@@ -9,15 +9,17 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <link type="text/css" href="./javapeda.css" rel="stylesheet" />
+        <title>JavaPeda - Home</title>
     </head>
     <body>
         <h1>JavaPeda</h1>
+        <h2>Home</h2>
         <form method="GET" action="UserServlet.do">
             <input type="radio" name="tbl" value="Login" checked="check">Login<br/>
             <input type="radio" name="tbl" value="Register">Register<br/>
             <br/>
-            <input type=submit value="Login"> <br/>
+            <input type=submit value="Proceed"> <br/>
         </form> 
     </body>
 </html>

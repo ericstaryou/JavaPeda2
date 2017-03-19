@@ -37,6 +37,14 @@
         <servlet-name>QuestionHandler</servlet-name>
         <servlet-class>controller.QuestionHandler</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SubtopicUserProgressControl</servlet-name>
+        <servlet-class>controller.SubtopicUserProgressControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AssessmentUserProgressControl</servlet-name>
+        <servlet-class>controller.AssessmentUserProgressControl</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Quercus Servlet</servlet-name>
         <url-pattern>*.php</url-pattern>
@@ -87,6 +95,14 @@
     <servlet-mapping>
         <servlet-name>QuestionHandler</servlet-name>
         <url-pattern>/QuestionHandler.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SubtopicUserProgressControl</servlet-name>
+        <url-pattern>/SubtopicUserProgressControl.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AssessmentUserProgressControl</servlet-name>
+        <url-pattern>/AssessmentUserProgressControl.do</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
