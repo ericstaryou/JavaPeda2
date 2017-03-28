@@ -52,6 +52,7 @@ public class SubtopicUserProgressControl extends HttpServlet {
         request.setAttribute("subtopicName", subtopicName);
         session.setAttribute("selectedTopic", selectedTopic);
         request.setAttribute("codeVal", selectedTopic.getDemoCode());
+        request.setAttribute("explanation", selectedTopic.getExplanation());
         request.getRequestDispatcher("/WEB-INF/teaching.jsp").forward(request, response);
     }
 

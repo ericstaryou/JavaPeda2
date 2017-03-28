@@ -106,7 +106,7 @@
         </table>-->
 <div>
     
-    <div id="pyInputPane" style="margin: auto">
+    <div id="pyInputPane" style="margin: auto; max-width: 98%">
 
             <p style="text-align:left;">Write your Java code here:</p>
 

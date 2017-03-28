@@ -66,6 +66,7 @@ public class TeachingControl extends HttpServlet {
         request.setAttribute("subtopicName", request.getParameter("opt"));
         session.setAttribute("selectedTopic", selectedTopic);
         request.setAttribute("codeVal", selectedTopic.getDemoCode());
+        request.setAttribute("explanation", selectedTopic.getExplanation());
 
         request.getRequestDispatcher("/WEB-INF/teaching.jsp").forward(request, response);
     }

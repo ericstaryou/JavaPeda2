@@ -193,6 +193,10 @@ public class Topic {
     public String getDemoCode() {
         return this.subtopic.codeValue;
     }
+    
+    public String getExplanation(){
+        return this.subtopic.textualExplanation;
+    }
 
     public String getSubtopicTitles() {
         StringBuilder b = new StringBuilder();

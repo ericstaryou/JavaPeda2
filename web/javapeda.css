@@ -21,3 +21,10 @@ h1 {
     margin-top: 0px;
     margin-bottom: 8px;
 }
+
+#exp {
+    background-color: #DCDCDC;
+    padding-left: 4px;
+    padding-right: 4px;
+    border-radius: 2px;
+}
