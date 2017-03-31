@@ -41,7 +41,7 @@ public class AssessmentControl extends HttpServlet {
         String assessmentName = request.getParameter("assessment");
         Assessment assessment = new Assessment(conn, assessmentName);
         session.setAttribute("asmt", assessment);
-        int noOfQuestion = assessment.getNoOfQuestion();
+        //int noOfQuestion = assessment.getNoOfQuestion();
         session.setAttribute("questionCounter", 0);
 
         User user = (User) session.getAttribute("userbean");

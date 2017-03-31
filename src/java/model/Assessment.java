@@ -33,21 +33,21 @@ public class Assessment {
             this.connect(conn);
             int assessmentID = Integer.parseInt(assessmentName.substring(11));
             this.assessmentID = assessmentID;
-            select("SELECT * FROM assessment WHERE assessmentID =" + assessmentID);
-            while (rs.next()) {
-                this.noOfQuestion = rs.getInt(2);
-            }
-
+            
+            //getting the number of question for the assessment
             select("SELECT COUNT(*) FROM question WHERE assessmentID=" + assessmentID);
             this.noOfQuestion = 0;
             while (rs.next()) {
                 noOfQuestion = rs.getInt(1);
             }
+            
+            //for every question create a Question object
             this.questions = new Question[noOfQuestion];
             for (int i = 0; i < noOfQuestion; i++) {
                 this.questions[i] = new Question();
             }
 
+            //for every Question object, populate the qustionID, question, and the options
             select("SELECT * FROM question WHERE assessmentID=" + assessmentID);
             for (int i = 0; i < noOfQuestion; i++) {
                 rs.next();

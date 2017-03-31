@@ -132,9 +132,9 @@
             <button class="accordion"><%= topics[1].getTopicName()%></button>
             <div class="panel">
                 <div>
-                    <form action="TeachingControl.do" method="get">
+                    <form action="AssessmentControl.do" method="get">
                         <%= topics[1].getSubtopicTitles()%>
-                        <input class="subt" name="opt" type="submit" value="Assessment"><br>
+                        <input class="subt" name="assessment" type="submit" value="Assessment 2"><br>
                     </form>
                 </div>
             </div>
@@ -142,9 +142,9 @@
             <button class="accordion"><%= topics[2].getTopicName()%></button>
             <div class="panel">
                 <div>
-                    <form action="TeachingControl.do" method="get">
+                    <form action="AssessmentControl.do" method="get">
                         <%= topics[2].getSubtopicTitles()%>
-                        <input class="subt" name="opt" type="submit" value="Assessment"><br>
+                        <input class="subt" name="assessment" type="submit" value="Assessment 3"><br>
                     </form>
                 </div>
             </div>

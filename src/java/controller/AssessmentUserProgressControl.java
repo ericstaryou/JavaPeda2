@@ -44,7 +44,7 @@ public class AssessmentUserProgressControl extends HttpServlet {
         //String assessmentName = (String) session.getAttribute("assessmentName");
         Assessment assessment = new Assessment(conn, assessmentName);
         session.setAttribute("asmt", assessment);
-        int noOfQuestion = assessment.getNoOfQuestion();
+        //int noOfQuestion = assessment.getNoOfQuestion();
         session.setAttribute("questionCounter", 0);
         //update user state
         int assessmentID = assessment.getAssessmentID();

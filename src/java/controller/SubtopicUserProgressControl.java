@@ -41,12 +41,13 @@ public class SubtopicUserProgressControl extends HttpServlet {
         //String subtopicName = request.getParameter("opt");
         //Topic selectedTopic = new Topic(conn, subtopicName);
         
-        String subtopicName = (String) session.getAttribute("subtopicName");
-        Topic selectedTopic = new Topic(conn, subtopicName);
         User user = (User) session.getAttribute("userbean");
+        String subtopicName = user.getCurrentSubtopicName();
+        //gets state's subtopic details and store it in a Topic object
+        Topic selectedTopic = new Topic(conn, subtopicName);
         int subtopicID = selectedTopic.getSubtopic().getSubtopicID();
         
-        //update user state
+        //update user state        
         user.getState().setSubtopicID(subtopicID);
         user.updateSelectedTopic(subtopicID);
 
