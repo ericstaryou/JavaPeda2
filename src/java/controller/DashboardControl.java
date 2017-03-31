@@ -50,7 +50,7 @@ public class DashboardControl extends HttpServlet {
         String subtopicName = user.getCurrentSubtopicName();
         String assessmentName = user.getCurrentAssessmentName();
         
-        if(subtopicName == null){
+        if(subtopicName == null){ //if user hasn't started any topic yet
             String msg = "You haven't start learning on any topic yet";
             session.setAttribute("subtopicProgress", msg);
         }else{
@@ -59,7 +59,7 @@ public class DashboardControl extends HttpServlet {
             session.setAttribute("subtopicProgress", msg);
         }
         
-        if(assessmentName == null){
+        if(assessmentName == null){ //if user hasn't started any topic yet
             String msg = "You haven't start any assessment yet";
             session.setAttribute("assessmentProgress", msg);
         }else{
