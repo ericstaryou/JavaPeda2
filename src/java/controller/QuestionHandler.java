@@ -42,16 +42,14 @@ public class QuestionHandler extends HttpServlet {
         Integer questionCounter = (Integer) session.getAttribute("questionCounter");
         String answer = assessment.getQuestion()[questionCounter].getAnswer();
 
-        if(request.getParameter("opt") == null){
+        if(request.getParameter("opt") == null){ //if user did not select an answer
             request.setAttribute("question", assessment.constructPage(questionCounter));
             request.getRequestDispatcher("/WEB-INF/assessment.jsp").include(request, response);
-            //out.print("<p style=\"float:right\">Please select an answer!</p>");
             out.print("Please select an answer!");
-        }else if (!request.getParameter("opt").equals(answer)) {
+        }else if (!request.getParameter("opt").equals(answer)) { //if user selected the wrong answer
             request.setAttribute("question", assessment.constructPage(questionCounter));
             request.getRequestDispatcher("/WEB-INF/assessment.jsp").include(request, response);
-           //out.print("<p style=\"float:right\">Please try again!</p>");
-           out.print("Please try again!");
+            out.print("Please try again!");
         } else {
             if((questionCounter + 1) == noOfQuestion){ //when user done the assessment
                 request.getRequestDispatcher("/WEB-INF/doneAssessment.jsp").forward(request, response);
@@ -60,9 +58,9 @@ public class QuestionHandler extends HttpServlet {
                 session.setAttribute("questionCounter", questionCounter + 1);
                 request.setAttribute("question", assessment.constructPage(questionCounter + 1));
                 request.getRequestDispatcher("/WEB-INF/assessment.jsp").include(request, response);
-                out.print("this is the last question");
+                //out.print("this is the last question");
             }
-            else{
+            else{ //if user got it right, navigate them to the next question
                 session.setAttribute("questionCounter", questionCounter + 1);
                 request.setAttribute("question", assessment.constructPage(questionCounter + 1));
                 request.getRequestDispatcher("/WEB-INF/assessment.jsp").forward(request, response);

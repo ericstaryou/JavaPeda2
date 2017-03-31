@@ -155,18 +155,18 @@ public class Assessment {
         }
     }
 
-    public String constructQuestion() {
-        StringBuilder b = new StringBuilder();
-        for (int i = 0; i < this.noOfQuestion; i++) {
-            b.append("<p class=\"question\">" + (i + 1) + ") " + this.questions[i].question + "</p>");
-            b.append("<ul class=\"answers\">");
-            for (int j = 0; j < 4; j++) {
-                b.append("<input type=\"radio\" name=\"q" + (i + 1) + "\" value=\"" + this.questions[i].options[j] + "\" id=\"q1a\"><label for=\"q1a\">" + this.questions[i].options[j] + "</label><br/>");
-            }
-            b.append("</ul>");
-        }
-        return b.toString();
-    }
+//    public String constructQuestion() {
+//        StringBuilder b = new StringBuilder();
+//        for (int i = 0; i < this.noOfQuestion; i++) {
+//            b.append("<p class=\"question\">" + (i + 1) + ") " + this.questions[i].question + "</p>");
+//            b.append("<ul class=\"answers\">");
+//            for (int j = 0; j < 4; j++) {
+//                b.append("<input type=\"radio\" name=\"q" + (i + 1) + "\" value=\"" + this.questions[i].options[j] + "\" id=\"q1a\"><label for=\"q1a\">" + this.questions[i].options[j] + "</label><br/>");
+//            }
+//            b.append("</ul>");
+//        }
+//        return b.toString();
+//    }
 
     public String constructPage(int qNo) {
         StringBuilder b = new StringBuilder();
@@ -201,7 +201,7 @@ public class Assessment {
 //                System.out.println("Answer: " + assessment.questions[i].answer);
 //            }
 
-            System.out.println(assessment.constructQuestion());
+            //System.out.println(assessment.constructQuestion());
         } catch (Exception e) {
 
         }
