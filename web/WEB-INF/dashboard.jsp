@@ -8,11 +8,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <% User user = (User) session.getAttribute("userbean");%>
-<%  Topic topics[] = new Topic[3];
-    for (int i = 0; i < 3; i++) {
-        topics[i] = (Topic) session.getAttribute("topic" + i);
-    }
-%>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
