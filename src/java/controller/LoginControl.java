@@ -47,7 +47,13 @@ public class LoginControl extends HttpServlet {
             //get params from login.jsp
             String username = request.getParameter("username");
             String password = User.hashPassword(request.getParameter("password"));
-            
+
+            //check if fields are empty
+            if (empty(username) || empty(password)) {
+                request.setAttribute("error", "please complete all fields!");
+                request.getRequestDispatcher("/WEB-INF/loginError.jsp").forward(request, response);
+            }
+
             Connection conn = (Connection) request.getServletContext().getAttribute("connection");
 
             User user = new User(conn);
@@ -57,7 +63,9 @@ public class LoginControl extends HttpServlet {
 //                response.setContentType("text/html;charset=UTF-8");
 //                response.getWriter().write("wrong username!");
 //                return;
-                request.getRequestDispatcher("/WEB-INF/wrongusername.jsp").forward(request, response);
+                request.setAttribute("error", "Wrong Username!");
+                request.getRequestDispatcher("/WEB-INF/loginError.jsp").forward(request, response);
+                //request.getRequestDispatcher("/WEB-INF/wrongusername.jsp").forward(request, response);
             }
 
             user.select("select * from user where username ='" + username + "'");
@@ -76,38 +84,35 @@ public class LoginControl extends HttpServlet {
 
             //if username & password match
             if (hm.get(username).equals(password)) {
-                //response.sendRedirect("WEB-INF/animation.html");
                 HttpSession session = request.getSession(); //create new session when user successfully logged in
                 user.setUsername(username);
                 user.setFname(fname);
                 user.setLname(lname);
                 user.select("select * from  subtopic_in_progress where username ='" + username + "'");
                 ResultSet rs2 = user.getRs();
-                while(rs2.next()){
+                while (rs2.next()) {
                     user.getState().setSubtopicID(rs2.getInt(2));
                 }
                 user.select("select * from assessment_in_progress where username ='" + username + "'");
                 ResultSet rs3 = user.getRs();
-                while(rs3.next()){
+                while (rs3.next()) {
                     user.getState().setAssessmentID(rs3.getInt(2));
                 }
                 session.setAttribute("userbean", user); //storing the user object and params for later use  
-                //request.getRequestDispatcher("/WEB-INF/ani/animation.jsp").forward(request, response);
                 request.getRequestDispatcher("DashboardControl.do").forward(request, response);
-                //request.getRequestDispatcher("/WEB-INF/test.jsp").forward(request, response);
-
-//                response.setContentType("text/html;charset=UTF-8");
-//                response.getWriter().write("true");
             } else {
                 //wrong password
-//                response.setContentType("text/html;charset=UTF-8");
-//                response.getWriter().write("wrong password!");
-//                return;
-                request.getRequestDispatcher("/WEB-INF/wrongPwd.jsp").forward(request, response);
+                request.setAttribute("error", "Wrong Password!");
+                request.getRequestDispatcher("/WEB-INF/loginError.jsp").forward(request, response);
             }
         } catch (Exception e) {
             Logger.getLogger(LoginControl.class.getName()).log(Level.SEVERE, null, e);
         }
+    }
+
+    public static boolean empty(final String s) {
+        // Null-safe, short-circuit evaluation.
+        return s == null || s.trim().isEmpty();
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
