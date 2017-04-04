@@ -15,5 +15,9 @@
     <body>
         <jsp:include page="/WEB-INF/header.jsp" />
         <h2>You've done your Assessment! Do you wish to go back to your dashboard?</h2>
+        <form method="GET" action="DashboardControl.do">
+            <input type=submit value="Yes"> 
+        </form> 
+        
     </body>
 </html>
